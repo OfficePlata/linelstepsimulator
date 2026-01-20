@@ -1,13 +1,3 @@
-ローカル環境なしでデプロイするための設定ファイル一式
-
-以下のファイルを、GitHubのリポジトリ画面の「Add file」→「Create new file」から順番に作成し、コードをコピペして保存（Commit changes）してください。
-
-すべて保存し終わると、Cloudflare Pagesが自動的に再ビルドを開始し、成功するようになります。
-
-1. package.json
-
-ファイル名: package.json （ルートディレクトリに作成）
-
 {
   "name": "line-lstep-simulator",
   "private": true,
