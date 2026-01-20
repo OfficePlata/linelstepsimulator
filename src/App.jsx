@@ -1,3 +1,131 @@
+ローカル環境なしでデプロイするための設定ファイル一式
+
+以下のファイルを、GitHubのリポジトリ画面の「Add file」→「Create new file」から順番に作成し、コードをコピペして保存（Commit changes）してください。
+
+すべて保存し終わると、Cloudflare Pagesが自動的に再ビルドを開始し、成功するようになります。
+
+1. package.json
+
+ファイル名: package.json （ルートディレクトリに作成）
+
+{
+  "name": "line-lstep-simulator",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "^0.344.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.21",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.18",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "vite": "^5.1.6"
+  }
+}
+
+
+2. vite.config.js
+
+ファイル名: vite.config.js （ルートディレクトリに作成）
+
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// [https://vitejs.dev/config/](https://vitejs.dev/config/)
+export default defineConfig({
+  plugins: [react()],
+})
+
+
+3. index.html
+
+ファイル名: index.html （ルートディレクトリに作成）
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LINE・Lステップ費用シミュレーター</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
+
+4. tailwind.config.js
+
+ファイル名: tailwind.config.js （ルートディレクトリに作成）
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+
+5. postcss.config.js
+
+ファイル名: postcss.config.js （ルートディレクトリに作成）
+
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+
+
+6. src/main.jsx
+
+重要: ファイル名にスラッシュが含まれています。GitHubでファイル名を入力する際、src/ と入力するとフォルダが作られます。
+ファイル名: src/main.jsx
+
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
+
+
+7. src/index.css
+
+ファイル名: src/index.css
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+8. src/App.jsx
+
+ファイル名: src/App.jsx
+以下のコードをすべてコピーして貼り付けてください。
+
 import React, { useState, useEffect, useMemo } from 'react';
 import { Calculator, Send, Users, AlertCircle, Info, ChevronDown, ChevronUp, Check } from 'lucide-react';
 
